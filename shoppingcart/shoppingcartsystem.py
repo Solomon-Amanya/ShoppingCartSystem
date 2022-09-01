@@ -12,7 +12,7 @@ class ShoppingCartSystem:
         return item.price
 
 
-store = Store("KK Store")
+store = Store("Amanya and sons")
 item1 = Item("2kg Banana", 800, 0.5)
 item2 = Item("1kg Sugar", 3000, 1)
 store.add_stock(item2)
@@ -20,5 +20,3 @@ store.add_stock(item2)
 shoppingCartSystem = ShoppingCartSystem()
 
 shoppingCartSystem.find_price(item2, store)
-
-
