@@ -11,12 +11,18 @@ class ShoppingCartSystem:
             print("sorry, item will be back soon")
         return item.price
 
+    def apply_discount(self, item):
+        discount = item.price * item.discount
+        return discount
+
 
 store = Store("Amanya and sons")
 item1 = Item("2kg Banana", 800, 0.5)
 item2 = Item("1kg Sugar", 3000, 1)
-store.add_stock(item2)
+store.add_stock(item1)
 
 shoppingCartSystem = ShoppingCartSystem()
 
-shoppingCartSystem.find_price(item2, store)
+shoppingCartSystem.find_price(item1, store)
+
+print(shoppingCartSystem.apply_discount(item1))
