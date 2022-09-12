@@ -1,6 +1,7 @@
 from store import Store
 from item import Item
 from customer import Customer
+Total = 0
 
 
 class ShoppingCartSystem:
@@ -24,9 +25,11 @@ class ShoppingCartSystem:
 
     def total_amount(self, item, store):
         amount_given = input("Money Given:")
-        for items in store.stock:
-            change = int(amount_given) - sum(item.price)
-            return change
+        for cost in store.prices:
+            total_cost = sum(store.prices)
+            balance = int(amount_given) - total_cost
+            print("Total cost: " + str(total_cost))
+            return balance
 
 
 store = Store("Amanya and sons")
@@ -36,11 +39,14 @@ item3 = Item("Noodles", 500, 0.2)
 store.add_stock(item1)
 store.add_stock(item2)
 store.add_stock(item3)
+store.add_price(item1)
+store.add_price(item2)
+store.add_price(item3)
 
 
 shoppingCartSystem = ShoppingCartSystem()
 
-shoppingCartSystem.find_price(item1, store)
+# shoppingCartSystem.find_price(item1, store)
 
 print(shoppingCartSystem.apply_discount(item1))
 
