@@ -1,54 +1,36 @@
 from store import Store
 from item import Item
 from customer import Customer
-Total = 0
+from discount_coupon import DiscountCoupon
 
 
-class ShoppingCartSystem:
-    def find_price(self, item, store):
-        if store.stock.__contains__(item):
-            return item.price
-        else:
-            print("sorry, item will be back soon")
-            return None
-
-    def apply_discount(self, item):
-        discount = item.price * item.discount
-        new_price = item.price - discount
-        return new_price
-
-    def delete_item(self, item, store):
-        if store.stock.__contains__(item):
-            store.stock.remove(item)
-        else:
-            return None
-
-    def total_amount(self, item, store):
-        amount_given = input("Money Given:")
-        for cost in store.prices:
-            total_cost = sum(store.prices)
-            balance = int(amount_given) - total_cost
-            print("Total cost: " + str(total_cost))
-            return balance
+def calc_total(bought_items):
+    total = 0
+    for item in bought_items:
+        total += item.subsidised_price()
+    return total
 
 
-store = Store("Amanya and sons")
-item1 = Item("2kg Banana", 800, 0.1)
-item2 = Item("1kg Sugar", 3000, 1)
-item3 = Item("Noodles", 500, 0.2)
-store.add_stock(item1)
-store.add_stock(item2)
-store.add_stock(item3)
-store.add_price(item1)
-store.add_price(item2)
-store.add_price(item3)
+shoe_coupon = DiscountCoupon("X105", 20)
+shocks_coupon = DiscountCoupon("X302", 5)
+no_discount = DiscountCoupon("X001", 0)
+item1 = Item("shoes", 25000, shoe_coupon)
+item2 = Item("socks", 2000, shocks_coupon)
+item3 = Item("trouser", 15000, no_discount)
 
+store = Store("KK Traders")
 
-shoppingCartSystem = ShoppingCartSystem()
+store.stock.append(item1)
+store.stock.append(item2)
 
-# shoppingCartSystem.find_price(item1, store)
+customer = Customer("Emily", 100000)
+customer.shop(item1, store)
+customer.shop(item2, store)
 
-print(shoppingCartSystem.apply_discount(item1))
+total = calc_total(customer.shopping_cart)
 
-print(shoppingCartSystem.total_amount(item1, store))
+change = customer.money - total
 
+print("Dear {}, {} is the total amount of purchased products".format(customer.name, total))
+print("Your change is {}".format(change))
+print(store.print_remaining_stock())
