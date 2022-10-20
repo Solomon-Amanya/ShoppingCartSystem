@@ -1,0 +1,12 @@
+The system should let users park their car in a parking lot and also let users retrieve their
+car from a parking lot.
+
+The business has 10 floors with each floor having 50 parking spots. The system should only let
+users park their car if a parking lot of a given floor is not 90% full.
+The system will also notify the business owner if the parking lot of a given floor is full so they
+can open the parking lot on the next floor.
+
+However, if the parking lot usage of any given floor stays at only 20% capacity for more than 6 hours,
+
+the system should also notify the owner so they don’t have to worry about opening the parking space of
+other floors.
